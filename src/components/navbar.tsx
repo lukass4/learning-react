@@ -14,17 +14,21 @@ export const Navbar = () => {
 		<div className="navbar">
 			<div className="links">
 				<Link to="/"> Home </Link>
-				<Link to="/login"> Login </Link>
+				{!user ? (
+					<Link to="/login"> Login </Link>
+				) : (
+					<Link to="/createpost"> Create Post </Link>
+				)}
 			</div>
 			<div className="user">
 				{user && (
 					<>
+						<p>{user?.displayName}</p>
 						<img
 							src={user?.photoURL || ""}
 							width="20"
 							height="20"
 						/>
-						<p>{user?.displayName}</p>
 						<button onClick={signUserOut}>Log Out</button>
 					</>
 				)}
