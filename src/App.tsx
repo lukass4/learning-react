@@ -1,22 +1,36 @@
 import React from "react";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Country, Person } from "./components/Person";
+import { Contact } from "./pages/Contact";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
-	const getAge = (name: string): number => { // = (input: inputType): returnType => {}
-		return 99;
-	};
-
 	return (
 		<div className="App">
-			<Person
-				name="Pedro"
-				email="pedro@gmail.com"
-				age={21}
-				isMarried={true}
-				friends={["jake", "jessica", "jerry"]}
-				country={Country.Brazil} // can only choose on of the countries
-			/>
+			<Router>
+				<Link to="/">Home</Link>
+				<Link to="/login">Login</Link>
+				<Link to="/contact">Contact</Link>
+				<Provider store={store}>
+					<Routes>
+						<Route
+							path="/"
+							element={<Home />}
+						/>
+						<Route
+							path="/login"
+							element={<Login />}
+						/>
+						<Route
+							path="/contact"
+							element={<Contact />}
+						/>
+					</Routes>
+				</Provider>
+			</Router>
 		</div>
 	);
 }
